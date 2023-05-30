@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tadlista" />
-        <module name="tadlista_alumnos 3" />
         <module name="tadlista_alumnos" />
+        <module name="obligatorio2023" />
       </profile>
     </annotationProcessing>
   </component>
