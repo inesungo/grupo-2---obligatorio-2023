@@ -10,7 +10,7 @@ public class ListaEnlazadaGenerics<T> implements ListaGenerics<T>
     {
         return this.primero;
     }
-    //a
+    //aasdasd
 
     @Override
     public boolean esVacia()
