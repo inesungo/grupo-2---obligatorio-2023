@@ -1,40 +1,41 @@
 package um.prog2.tad.stack;
 
-import um.prog2.tad.listagenericos.ListaEnlazadaGenerics;
+import um.prog2.tad.listagenericos.LinkedListGenerics;
 
 import um.prog2.tad.exceptions.EmptyStackException;
 
-public class PilaEnlazada<T> extends ListaEnlazadaGenerics<T> implements Pila<T> {
+public class LinkedStack<T> extends LinkedListGenerics<T> implements MyStack<T> {
 
 
     @Override
-    public void push(T dato) {
-        agregar(dato);
+    public void push(T data) {
+        add(data);
     }
 
     @Override
     public T pop() throws EmptyStackException {
-        if(esVacia()){
+        if(this.isEmpty()){
             throw new EmptyStackException();
         }
         else {
-            return quitar(0);
+            return remove(0);
         }
     }
 
     @Override
     public T top() {
-        return (T) getPrimero().getDato();
+        return (T) getFirst().getData();
     }
 
     @Override
     public boolean isEmpty() {
-        return esVacia();
+
+        return this.isEmpty();
     }
 
     @Override
     public void clear() {
-        vaciar();
+        this.clear();
 
     }
 }
