@@ -2,13 +2,14 @@ package um.prog2.tad.lista;
 
 import um.prog2.tad.exceptions.IllegalIndexException;
 
-public interface MyList
-{
+public interface MyList<K> {
     public boolean isEmpty();
 
-    public void add(Object obj);
+    abstract void add(Object obj);
 
     public void addlast(Object obj);
+
+    void addLast(Object obj);
 
     public void add(Object obj, int index) throws IllegalIndexException;
 

@@ -1,8 +1,7 @@
 package um.prog2.tad.lista;
 
-public class Node
-{
-    private Node next;
+public class Node<T> {
+    private Node<T> next;
     private Object data;
 
     public Node()
@@ -15,12 +14,12 @@ public class Node
         this.data = data;
     }
 
-    public Node getNext()
+    public Node<T> getNext()
     {
         return this.next;
     }
 
-    public void setNext(Node node)
+    public void setNext(Node<T> node)
     {
         this.next = node;
     }
