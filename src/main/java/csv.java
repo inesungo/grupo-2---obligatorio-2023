@@ -6,7 +6,7 @@ import org.apache.commons.csv.CSVRecord;
 
     public class csv {
         public static void main(String[] args) {
-            try (FileReader reader = new FileReader("ruta_del_archivo.csv");
+            try (FileReader reader = new FileReader("src/main/java/f1_dataset_test.csv");
                  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
 
                 for (CSVRecord csvRecord : csvParser) {
