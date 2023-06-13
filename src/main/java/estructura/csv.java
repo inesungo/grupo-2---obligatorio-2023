@@ -1,3 +1,5 @@
+package estructura;
+
 import java.io.FileReader;
 import java.io.IOException;
 import org.apache.commons.csv.CSVFormat;
@@ -6,7 +8,7 @@ import org.apache.commons.csv.CSVRecord;
 
     public class csv {
         public static void main(String[] args) {
-            try (FileReader reader = new FileReader("src/main/java/f1_dataset_test.csv");
+            try (FileReader reader = new FileReader("src/main/resources/f1_dataset_test.csv");
                  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
 
                 for (CSVRecord csvRecord : csvParser) {

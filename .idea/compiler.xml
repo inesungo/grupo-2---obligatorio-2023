@@ -9,6 +9,7 @@
         <module name="tadlista" />
         <module name="tadlista_alumnos" />
         <module name="obligatorio2023" />
+        <module name="grupo-2---obligatorio-2023" />
         <module name="Obligatorio_primera_entrega" />
       </profile>
     </annotationProcessing>

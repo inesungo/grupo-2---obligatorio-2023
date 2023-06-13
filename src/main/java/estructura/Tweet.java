@@ -1,3 +1,5 @@
+package estructura;
+
 public class Tweet {
     private long id;
     private String content;
