@@ -21,4 +21,5 @@ public interface MyHash<Key, Value> {
 
     int size();
 
+    Value getOrDefault(Key anio, Value total);
 }

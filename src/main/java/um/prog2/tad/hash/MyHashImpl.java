@@ -5,7 +5,7 @@ import um.prog2.tad.lista.MyList;
 
 import java.util.HashMap;
 
-public class MyHashImpl<Key, Value> implements MyHash<Key, Value> {
+public abstract class MyHashImpl<Key, Value> implements MyHash<Key, Value> {
 
     private HashMap<Key, Value> map = null;
 

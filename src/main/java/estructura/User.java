@@ -1,8 +1,12 @@
 package estructura;
+
 public class User {
 
     private long id;
     private String name;
+
+    private String username;
+    private boolean isVerified;
 
     public User(long id, String name) {
         this.id = id;
@@ -27,5 +31,13 @@ public class User {
 
     public int compareTo(User o) {
         return (int)id-(int)o.getId();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
     }
 }
