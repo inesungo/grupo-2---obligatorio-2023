@@ -1,8 +1,14 @@
 package estructura;
 
 public class Hashtag {
+
     private long id;
     private String text;
+
+    public Hashtag(long id, String text) {
+        this.id = id;
+        this.text = text;
+    }
 
     public long getId() {
         return id;
@@ -17,11 +23,6 @@ public class Hashtag {
     }
 
     public void setText(String text) {
-        this.text = text;
-    }
-
-    public Hashtag(long id, String text) {
-        this.id = id;
         this.text = text;
     }
 }

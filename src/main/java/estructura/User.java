@@ -1,14 +1,11 @@
 package estructura;
-
 public class User {
+
     private long id;
     private String name;
 
-    public User(long id) {
+    public User(long id, String name) {
         this.id = id;
-    }
-
-    public User(String name) {
         this.name = name;
     }
 
@@ -26,5 +23,9 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int compareTo(User o) {
+        return (int)id-(int)o.getId();
     }
 }
