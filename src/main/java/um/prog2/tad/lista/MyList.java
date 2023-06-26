@@ -24,4 +24,8 @@ public interface MyList<K> {
     public void clear();
 
     void printData();
+
+    int size();
+
+    K get(int i);
 }

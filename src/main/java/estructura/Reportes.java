@@ -5,6 +5,7 @@ import estructura.Hashtag;
 import estructura.Tweet;
 import um.prog2.tad.hash.MyHash;
 import um.prog2.tad.hash.MyHashImpl;
+import um.prog2.tad.lista.MyList;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Reportes {
+
 
 
 //reporte1:
@@ -72,13 +74,13 @@ public class Reportes {
 
     //reporte2:
     public List<UserReport> top15UsersWithMostTweets(List<Tweet> tweets) {
-        HashMap<String, UserReport> usersCount = new HashMap<>();
+        MyHashImpl<String, UserReport> usersCount = new MyHashImpl<>();
 
         for (Tweet tweet : tweets) {
             String username = tweet.getUser().getUsername();
             UserReport userReport;
 
-            if (usersCount.containsKey(username)) {
+            if (usersCount.contains(username)) {
                 userReport = usersCount.get(username);
             } else {
                 userReport = new UserReport(username, tweet.getUser().isVerified());
@@ -88,8 +90,11 @@ public class Reportes {
             userReport.incrementTweetsCount();
         }
 
-        // Transformar el HashMap a una lista y ordenarla
-        List<UserReport> top15Users = new ArrayList<>(usersCount.values());
+        // Transformar el MyHashImpl a una lista y ordenarla
+        List<UserReport> top15Users = new ArrayList<>();
+        for (int i = 0; i < usersCount.keys().size(); i++) {
+            top15Users.add(usersCount.get(usersCount.keys().get(i)));
+        }
         top15Users.sort((u1, u2) -> Integer.compare(u2.getTweetsCount(), u1.getTweetsCount()));
 
         // Si hay más de 15 usuarios, quedarse solo con los primeros 15
@@ -99,6 +104,7 @@ public class Reportes {
 
         return top15Users;
     }
+
 
     //reporte3:
     public int cantidadHashtagsPorDia(List<Tweet> tweets, String fecha) {
@@ -124,32 +130,42 @@ public class Reportes {
 
     //reporte4: Hashtag más usado para un día dado, sin tener en cuenta #f1. El día será ingresado en el formato YYYY-MM-DD.
     public String mostUsedHashtag(List<Tweet> tweets, LocalDate date) {
-        Map<String, Integer> hashtagCount = new HashMap<>();
+        MyHashImpl<String, Integer> hashtagCount = new MyHashImpl<>();
 
         for (Tweet tweet : tweets) {
             if (tweet.getDate().equals(date)) {
                 for (Hashtag hashtag : tweet.getHashtagsList()) {
                     // ignoramos el hashtag #f1
                     if (!hashtag.getText().equalsIgnoreCase("#f1")) {
-                        hashtagCount.put(hashtag.getText(), hashtagCount.getOrDefault(hashtag.getText(), 0) + 1);
+                        if (hashtagCount.contains(hashtag.getText())) {
+                            hashtagCount.put(hashtag.getText(), hashtagCount.get(hashtag.getText()) + 1);
+                        } else {
+                            hashtagCount.put(hashtag.getText(), 1);
+                        }
                     }
                 }
             }
         }
 
         // encontrar el hashtag más usado
-        Map.Entry<String, Integer> mostUsedHashtag = null;
-        for (Map.Entry<String, Integer> entry : hashtagCount.entrySet()) {
-            if (mostUsedHashtag == null || entry.getValue() > mostUsedHashtag.getValue()) {
-                mostUsedHashtag = entry;
+        String mostUsedHashtag = null;
+        int maxCount = 0;
+        MyList<String> keys = hashtagCount.keys();
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            int count = hashtagCount.get(key);
+            if (count > maxCount) {
+                mostUsedHashtag = key;
+                maxCount = count;
             }
         }
 
         // devolver el hashtag más usado
-        return mostUsedHashtag != null ? mostUsedHashtag.getKey() : "No hashtags used";
+        return mostUsedHashtag != null ? mostUsedHashtag : "No hashtags used";
     }
 
     //reporte5:Top 7 cuentas con más favoritos. Para este listado se deberá retornar el nombre del usuario, junto con la cantidad de favoritos.
+
 
     private HashMap<User, Integer> favoritosPorUsuario = new HashMap<>();
 
@@ -179,6 +195,7 @@ public class Reportes {
 
 
     }
+
 
     //reporte6:Cantidad de tweets con una palabra o frase específicos (que será ingresado como parámetro).
     public int contarTweetsConPalabra(List<Tweet> tweets, String palabra) {

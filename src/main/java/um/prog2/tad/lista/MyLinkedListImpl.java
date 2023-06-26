@@ -141,6 +141,16 @@ public class MyLinkedListImpl<T> implements MyList<T> {
         }
     }
 
+    @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
+    public T get(int i) {
+        return null;
+    }
+
     public Node getFirst() {
         return this.first;
     }

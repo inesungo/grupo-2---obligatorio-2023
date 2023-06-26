@@ -5,40 +5,34 @@ import um.prog2.tad.lista.MyList;
 
 import java.util.HashMap;
 
-public abstract class MyHashImpl<Key, Value> implements MyHash<Key, Value> {
-
-    private HashMap<Key, Value> map = null;
+public class MyHashImpl<Key, Value> implements MyHash<Key, Value> {
+    private HashMap<Key, Value> map;
 
     /**
      * Crea un hash cerrado con la cantidad de buckets de 16
      */
     public MyHashImpl() {
-        map = new HashMap<Key, Value>();
+        this.map = new HashMap<>();
     }
 
     /**
      * Crea un hash cerrado con la cantidad de buckets inicial de "initialCapacity"
      */
     public MyHashImpl(int initialCapacity) {
-        map = new HashMap<Key, Value>(initialCapacity);
+        this.map = new HashMap<>(initialCapacity);
     }
-
 
     @Override
     public MyList<Key> keys() {
         MyList<Key> toReturn = new MyLinkedListImpl<>();
-
-        map.keySet().stream().forEach(s -> toReturn.add(s));
-
+        map.keySet().stream().forEach(toReturn::add);
         return toReturn;
     }
 
     @Override
     public MyList<Value> values() {
-        MyList<Value> toReturn = (MyList<Value>) new MyLinkedListImpl();
-
-        map.values().stream().forEach(s -> toReturn.add(s));
-
+        MyList<Value> toReturn = new MyLinkedListImpl<>();
+        map.values().stream().forEach(toReturn::add);
         return toReturn;
     }
 
@@ -67,5 +61,8 @@ public abstract class MyHashImpl<Key, Value> implements MyHash<Key, Value> {
         map.remove(key);
     }
 
-
+    @Override
+    public Value getOrDefault(Key key, Value defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
 }
